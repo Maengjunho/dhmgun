@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>의사소통 퀴즈</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>의사소통 퀴즈</h1>
+    <p>직장 동료가 업무 실수로 인해 상사에게 혼이 나고 자책감에 빠져 있습니다. 동료는 "내가 팀에 피해를 준 것 같아 정말 미안하고 속상해"라며 당신에게 자신의 마음을 털어놓습니다.</p>
+    
+    <form id="quiz-form">
+        <ol>
+            <li>
+                "이 정도 실수는 누구나 할 수 있는 거야. 다음엔 더 잘하면 되지."
+                <div class="buttons" data-question="q1">
+                    <button type="button" value="1.0">1.0</button>
+                    <button type="button" value="2.0">2.0</button>
+                    <button type="button" value="3.0">3.0</button>
+                    <button type="button" value="4.0">4.0</button>
+                </div>
+            </li>
+            <li>
+                "아, 상사한테 혼나서 힘들었겠네요."
+                <div class="buttons" data-question="q2">
+                    <button type="button" value="1.0">1.0</button>
+                    <button type="button" value="2.0">2.0</button>
+                    <button type="button" value="3.0">3.0</button>
+                    <button type="button" value="4.0">4.0</button>
+                </div>
+            </li>
+            <li>
+                "정말 속상했겠어요. 누구라도 실수할 수 있는 상황이었을 거예요."
+                <div class="buttons" data-question="q3">
+                    <button type="button" value="1.0">1.0</button>
+                    <button type="button" value="2.0">2.0</button>
+                    <button type="button" value="3.0">3.0</button>
+                    <button type="button" value="4.0">4.0</button>
+                </div>
+            </li>
+            <li>
+                "팀에 피해를 준 것 같다고 자책하는 마음, 충분히 이해해요. 당연히 미안함이 들 수밖에 없겠네요."
+                <div class="buttons" data-question="q4">
+                    <button type="button" value="1.0">1.0</button>
+                    <button type="button" value="2.0">2.0</button>
+                    <button type="button" value="3.0">3.0</button>
+                    <button type="button" value="4.0">4.0</button>
+                </div>
+            </li>
+            <li>
+                "그냥 신경 쓰지 마. 우리 팀도 다 이해할 거야."
+                <div class="buttons" data-question="q5">
+                    <button type="button" value="1.0">1.0</button>
+                    <button type="button" value="2.0">2.0</button>
+                    <button type="button" value="3.0">3.0</button>
+                    <button type="button" value="4.0">4.0</button>
+                </div>
+            </li>
+            <li>
+                "상사도 그 순간 감정적으로 반응했을 거예요. 스스로 너무 자책하지 마세요."
+                <div class="buttons" data-question="q6">
+                    <button type="button" value="1.0">1.0</button>
+                    <button type="button" value="2.0">2.0</button>
+                    <button type="button" value="3.0">3.0</button>
+                    <button type="button" value="4.0">4.0</button>
+                </div>
+            </li>
+            <li>
+                "다음엔 조심하면 돼. 지나간 일은 그냥 잊어버려."
+                <div class="buttons" data-question="q7">
+                    <button type="button" value="1.0">1.0</button>
+                    <button type="button" value="2.0">2.0</button>
+                    <button type="button" value="3.0">3.0</button>
+                    <button type="button" value="4.0">4.0</button>
+                </div>
+            </li>
+            <li>
+                "혼난 후에 얼마나 긴장되고 힘들었을지 이해가 돼요. 그 상황에서 누구라도 실수할 수 있었을 거예요."
+                <div class="buttons" data-question="q8">
+                    <button type="button" value="1.0">1.0</button>
+                    <button type="button" value="2.0">2.0</button>
+                    <button type="button" value="3.0">3.0</button>
+                    <button type="button" value="4.0">4.0</button>
+                </div>
+            </li>
+            <li>
+                "아, 그런 일이 있었군요. 신경 쓰였겠네요."
+                <div class="buttons" data-question="q9">
+                    <button type="button" value="1.0">1.0</button>
+                    <button type="button" value="2.0">2.0</button>
+                    <button type="button" value="3.0">3.0</button>
+                    <button type="button" value="4.0">4.0</button>
+                </div>
+            </li>
+            <li>
+                "당신이라면 충분히 다시 회복할 수 있을 거예요. 그런 상황에서 누구나 힘들 수 있죠."
+                <div class="buttons" data-question="q10">
+                    <button type="button" value="1.0">1.0</button>
+                    <button type="button" value="2.0">2.0</button>
+                    <button type="button" value="3.0">3.0</button>
+                    <button type="button" value="4.0">4.0</button>
+                </div>
+            </li>
+        </ol>
+        <button type="submit">제출하기</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
