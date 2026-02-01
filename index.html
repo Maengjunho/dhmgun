@@ -394,6 +394,11 @@
             if (data.phone) document.getElementById('phone').textContent = data.phone;
             if (data.course) document.getElementById('course').textContent = data.course;
 
+            // URL에서 쿼리 파라미터 제거 (주소창 깔끔하게)
+            if (window.location.search) {
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+
             // 정보가 없는 항목은 숨기기
             const infoItems = document.querySelectorAll('.info-item');
             infoItems.forEach(item => {
