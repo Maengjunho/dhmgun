@@ -415,13 +415,13 @@
             const container = document.getElementById('confetti-container');
             const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#dfe6e9', '#a29bfe', '#fd79a8'];
 
-            for (let i = 0; i < 150; i++) {
+            for (let i = 0; i < 300; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti-piece';
                 confetti.style.cssText = `
                     --color: ${colors[Math.floor(Math.random() * colors.length)]};
-                    --delay: ${Math.random() * 3}s;
-                    --duration: ${2 + Math.random() * 3}s;
+                    --delay: ${Math.random() * 5}s;
+                    --duration: ${4 + Math.random() * 4}s;
                     left: ${Math.random() * 100}vw;
                     top: -20px;
                     transform: rotate(${Math.random() * 360}deg);
@@ -433,7 +433,7 @@
         // 폭죽 파티클 효과
         function createFirework(x, y) {
             const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffeaa7', '#a29bfe', '#fd79a8', '#00b894', '#fdcb6e'];
-            const particleCount = 30;
+            const particleCount = 60;
 
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
@@ -450,13 +450,13 @@
                     background: ${colors[Math.floor(Math.random() * colors.length)]};
                     --tx: ${tx}px;
                     --ty: ${ty}px;
-                    --duration: ${0.6 + Math.random() * 0.4}s;
+                    --duration: ${1.2 + Math.random() * 0.8}s;
                     box-shadow: 0 0 6px ${colors[Math.floor(Math.random() * colors.length)]};
                 `;
 
                 document.body.appendChild(particle);
 
-                setTimeout(() => particle.remove(), 1000);
+                setTimeout(() => particle.remove(), 2500);
             }
         }
 
@@ -476,7 +476,7 @@
 
             // 추가 폭죽
             setTimeout(() => {
-                for (let i = 0; i < 3; i++) {
+                for (let i = 0; i < 8; i++) {
                     setTimeout(() => {
                         createFirework(
                             Math.random() * window.innerWidth,
@@ -497,9 +497,9 @@
             setInterval(() => {
                 createFirework(
                     Math.random() * window.innerWidth,
-                    Math.random() * window.innerHeight * 0.4
+                    Math.random() * window.innerHeight * 0.5
                 );
-            }, 3000);
+            }, 1500);
         });
     </script>
 </body>
