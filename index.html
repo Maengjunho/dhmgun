@@ -302,29 +302,34 @@
             }
         }
 
-        /* 입금계좌 버튼 */
+        /* 입금계좌 버튼 - 카카오톡 버튼과 동일한 스타일 */
         .bank-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            padding: 14px 28px;
-            border-radius: 50px;
+            gap: 12px;
+            background: #10b981;
+            color: #ffffff;
             font-size: 16px;
             font-weight: 600;
+            padding: 16px 32px;
+            border-radius: 12px;
             text-decoration: none;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-            margin-bottom: 12px;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+            margin-top: 16px;
         }
 
         .bank-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
+        }
+
+        .bank-btn:active {
+            transform: translateY(0);
         }
 
         .bank-btn svg {
@@ -491,15 +496,15 @@
             <div class="bank-info">
                 <div class="bank-info-item">
                     <span class="bank-info-label">은행</span>
-                    <span class="bank-info-value">신한은행</span>
+                    <span class="bank-info-value">국민은행</span>
                 </div>
                 <div class="bank-info-item">
                     <span class="bank-info-label">계좌번호</span>
-                    <span class="bank-info-value">110-123-456789</span>
+                    <span class="bank-info-value">680801-01-523422</span>
                 </div>
                 <div class="bank-info-item">
                     <span class="bank-info-label">예금주</span>
-                    <span class="bank-info-value">덴조이치과</span>
+                    <span class="bank-info-value">맹준호(디앤조이)</span>
                 </div>
             </div>
             <button class="modal-close-btn" onclick="closeBankModal()">닫기</button>
