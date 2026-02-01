@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강의 신청 완료</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 25%, #16213e 50%, #1a1a2e 75%, #0f0f1a 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* 은은한 빛 효과 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 60%);
+            animation: floatGlow 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatGlow {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            33% {
+                transform: translate(30px, -30px) rotate(5deg);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) rotate(-5deg);
+            }
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 48px 40px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            animation: scaleIn 0.5s ease-out, pulse 2s ease-in-out infinite;
+            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3);
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 10px 60px rgba(16, 185, 129, 0.5);
+            }
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            color: white;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: left;
+        }
+
+        .info-card h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .info-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .kakao-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #FEE500;
+            color: #000000;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(254, 229, 0, 0.3);
+        }
+
+        .kakao-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(254, 229, 0, 0.4);
+        }
+
+        .kakao-btn:active {
+            transform: translateY(0);
+        }
+
+        .kakao-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .footer-text {
+            margin-top: 24px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* 폭죽 효과 */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            background: var(--color);
+            opacity: 0;
+            animation: confettiFall var(--duration) ease-out forwards;
+            animation-delay: var(--delay);
+            border-radius: 2px;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(0) rotateZ(0deg) rotateX(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotateZ(720deg) rotateX(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* 폭죽 파티클 */
+        .firework {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: explode var(--duration) ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* 반응형 */
+        @media (max-width: 480px) {
+            .container {
+                padding: 32px 24px;
+            }
+
+            .title {
+                font-size: 24px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+            .info-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 폭죽/컨페티 컨테이너 -->
+    <div id="confetti-container"></div>
+
+    <div class="container">
+        <div class="success-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+        </div>
+
+        <h1 class="title">강의를 신청해주셔서 감사합니다! 🎉</h1>
+        <p class="subtitle">신청이 성공적으로 완료되었습니다.<br>아래 단톡방에 참여하시면 강의 관련 안내를 받으실 수 있습니다.</p>
+
+        <div class="info-card">
+            <h3>📋 신청 정보</h3>
+            <div id="submission-info">
+                <div class="info-item">
+                    <span class="info-label">이름</span>
+                    <span class="info-value" id="name">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">연락처</span>
+                    <span class="info-value" id="phone">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">이메일</span>
+                    <span class="info-value" id="email">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">지역</span>
+                    <span class="info-value" id="location">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">치과명</span>
+                    <span class="info-value" id="clinic">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">직급</span>
+                    <span class="info-value" id="position">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">경력</span>
+                    <span class="info-value" id="experience">-</span>
+                </div>
+            </div>
+        </div>
+
+        <a href="https://open.kakao.com/o/gXXXXXXX" class="kakao-btn" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M12 3C6.48 3 2 6.58 2 11c0 2.84 1.88 5.34 4.7 6.77-.15.54-.54 1.96-.62 2.27-.1.38.14.38.29.27.12-.08 1.87-1.24 2.63-1.75.65.1 1.32.15 2 .15 5.52 0 10-3.58 10-8s-4.48-8-10-8z" />
+            </svg>
+            카카오톡 단톡방 참여하기
+        </a>
+
+        <p class="footer-text">문의사항이 있으시면 단톡방에서 질문해주세요.</p>
+    </div>
+
+    <script>
+        // URL 파라미터에서 Tally 폼 데이터 가져오기
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const data = {};
+
+            // Tally에서 전달되는 파라미터들 - 실제 필드 ID에 맞게 수정
+            const fieldMappings = {
+                'name': ['name', 'Name', '이름'],
+                'phone': ['phone', 'Phone', '연락처', '전화번호'],
+                'email': ['email', 'Email', '이메일'],
+                'location': ['location', 'Location', '지역'],
+                'clinic': ['clinic', 'Clinic', '치과명', '치과'],
+                'position': ['position', 'Position', '직급'],
+                'experience': ['experience', 'Experience', '경력']
+            };
+
+            for (const [key, aliases] of Object.entries(fieldMappings)) {
+                for (const alias of aliases) {
+                    const value = params.get(alias);
+                    if (value) {
+                        data[key] = decodeURIComponent(value);
+                        break;
+                    }
+                }
+            }
+
+            // 모든 파라미터 출력 (디버깅용)
+            params.forEach((value, key) => {
+                console.log(`Parameter: ${key} = ${value}`);
+            });
+
+            return data;
+        }
+
+        // 신청 정보 표시
+        function displaySubmissionInfo() {
+            const data = getUrlParams();
+
+            if (data.name) document.getElementById('name').textContent = data.name;
+            if (data.phone) document.getElementById('phone').textContent = data.phone;
+            if (data.email) document.getElementById('email').textContent = data.email;
+            if (data.location) document.getElementById('location').textContent = data.location;
+            if (data.clinic) document.getElementById('clinic').textContent = data.clinic;
+            if (data.position) document.getElementById('position').textContent = data.position;
+            if (data.experience) document.getElementById('experience').textContent = data.experience;
+
+            // 정보가 없는 항목은 숨기기
+            const infoItems = document.querySelectorAll('.info-item');
+            infoItems.forEach(item => {
+                const value = item.querySelector('.info-value');
+                if (value && value.textContent === '-') {
+                    item.style.display = 'none';
+                }
+            });
+
+            // 모든 정보가 없으면 카드 자체를 숨기기
+            const visibleItems = document.querySelectorAll('.info-item:not([style*="display: none"])');
+            if (visibleItems.length === 0) {
+                document.querySelector('.info-card').style.display = 'none';
+            }
+        }
+
+        // 컨페티 효과
+        function createConfetti() {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#dfe6e9', '#a29bfe', '#fd79a8'];
+
+            for (let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti-piece';
+                confetti.style.cssText = `
+                    --color: ${colors[Math.floor(Math.random() * colors.length)]};
+                    --delay: ${Math.random() * 3}s;
+                    --duration: ${2 + Math.random() * 3}s;
+                    left: ${Math.random() * 100}vw;
+                    top: -20px;
+                    transform: rotate(${Math.random() * 360}deg);
+                `;
+                container.appendChild(confetti);
+            }
+        }
+
+        // 폭죽 파티클 효과
+        function createFirework(x, y) {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffeaa7', '#a29bfe', '#fd79a8', '#00b894', '#fdcb6e'];
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+
+                const angle = (i / particleCount) * Math.PI * 2;
+                const velocity = 50 + Math.random() * 100;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity;
+
+                particle.style.cssText = `
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    --tx: ${tx}px;
+                    --ty: ${ty}px;
+                    --duration: ${0.6 + Math.random() * 0.4}s;
+                    box-shadow: 0 0 6px ${colors[Math.floor(Math.random() * colors.length)]};
+                `;
+
+                document.body.appendChild(particle);
+
+                setTimeout(() => particle.remove(), 1000);
+            }
+        }
+
+        // 여러 폭죽 발사
+        function launchFireworks() {
+            const positions = [
+                { x: window.innerWidth * 0.2, y: window.innerHeight * 0.3 },
+                { x: window.innerWidth * 0.8, y: window.innerHeight * 0.25 },
+                { x: window.innerWidth * 0.5, y: window.innerHeight * 0.2 },
+                { x: window.innerWidth * 0.3, y: window.innerHeight * 0.4 },
+                { x: window.innerWidth * 0.7, y: window.innerHeight * 0.35 },
+            ];
+
+            positions.forEach((pos, index) => {
+                setTimeout(() => createFirework(pos.x, pos.y), index * 300);
+            });
+
+            // 추가 폭죽
+            setTimeout(() => {
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        createFirework(
+                            Math.random() * window.innerWidth,
+                            Math.random() * window.innerHeight * 0.5
+                        );
+                    }, i * 400);
+                }
+            }, 2000);
+        }
+
+        // 페이지 로드 시 실행
+        document.addEventListener('DOMContentLoaded', () => {
+            displaySubmissionInfo();
+            createConfetti();
+            launchFireworks();
+
+            // 주기적으로 폭죽 효과 반복 (선택사항)
+            setInterval(() => {
+                createFirework(
+                    Math.random() * window.innerWidth,
+                    Math.random() * window.innerHeight * 0.4
+                );
+            }, 3000);
+        });
+    </script>
+</body>
+
+</html>
