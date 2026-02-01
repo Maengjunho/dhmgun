@@ -416,6 +416,40 @@
             font-weight: 600;
         }
 
+        .account-number-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .copy-btn {
+            background: rgba(16, 185, 129, 0.2);
+            border: none;
+            border-radius: 6px;
+            padding: 4px 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #10b981;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(16, 185, 129, 0.4);
+        }
+
+        .copy-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .copy-btn.copied {
+            background: #10b981;
+            color: white;
+        }
+
         .modal-close-btn {
             background: rgba(255, 255, 255, 0.1);
             color: white;
@@ -500,7 +534,16 @@
                 </div>
                 <div class="bank-info-item">
                     <span class="bank-info-label">계좌번호</span>
-                    <span class="bank-info-value">680801-01-523422</span>
+                    <div class="account-number-wrapper">
+                        <span class="bank-info-value" id="accountNumber">680801-01-523422</span>
+                        <button class="copy-btn" onclick="copyAccountNumber()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            <span>복사</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="bank-info-item">
                     <span class="bank-info-label">예금주</span>
@@ -683,6 +726,42 @@
                 closeBankModal();
             }
         });
+
+        // 계좌번호 복사 함수
+        function copyAccountNumber() {
+            // 숫자만 추출 (하이픈 제거)
+            const accountNumber = '68080101523422';
+
+            navigator.clipboard.writeText(accountNumber).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const btnText = btn.querySelector('span');
+                btn.classList.add('copied');
+                btnText.textContent = '완료!';
+
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btnText.textContent = '복사';
+                }, 2000);
+            }).catch(err => {
+                // 폴백: 구형 브라우저 지원
+                const textArea = document.createElement('textarea');
+                textArea.value = accountNumber;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                const btn = document.querySelector('.copy-btn');
+                const btnText = btn.querySelector('span');
+                btn.classList.add('copied');
+                btnText.textContent = '완료!';
+
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btnText.textContent = '복사';
+                }, 2000);
+            });
+        }
     </script>
 </body>
 
