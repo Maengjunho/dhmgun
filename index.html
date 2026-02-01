@@ -335,20 +335,12 @@
                     <span class="info-value" id="email">-</span>
                 </div>
                 <div class="info-item">
-                    <span class="info-label">지역</span>
-                    <span class="info-value" id="location">-</span>
+                    <span class="info-label">결제수단</span>
+                    <span class="info-value" id="payment">-</span>
                 </div>
                 <div class="info-item">
-                    <span class="info-label">치과명</span>
-                    <span class="info-value" id="clinic">-</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">직급</span>
-                    <span class="info-value" id="position">-</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">경력</span>
-                    <span class="info-value" id="experience">-</span>
+                    <span class="info-label">지출증빙</span>
+                    <span class="info-value" id="receipt">-</span>
                 </div>
             </div>
         </div>
@@ -375,10 +367,8 @@
                 'name': ['name', 'Name', '이름'],
                 'phone': ['phone', 'Phone', '연락처', '전화번호'],
                 'email': ['email', 'Email', '이메일'],
-                'location': ['location', 'Location', '지역'],
-                'clinic': ['clinic', 'Clinic', '치과명', '치과'],
-                'position': ['position', 'Position', '직급'],
-                'experience': ['experience', 'Experience', '경력']
+                'payment': ['payment', 'Payment', '결제수단'],
+                'receipt': ['receipt', 'Receipt', '지출증빙']
             };
 
             for (const [key, aliases] of Object.entries(fieldMappings)) {
@@ -406,10 +396,8 @@
             if (data.name) document.getElementById('name').textContent = data.name;
             if (data.phone) document.getElementById('phone').textContent = data.phone;
             if (data.email) document.getElementById('email').textContent = data.email;
-            if (data.location) document.getElementById('location').textContent = data.location;
-            if (data.clinic) document.getElementById('clinic').textContent = data.clinic;
-            if (data.position) document.getElementById('position').textContent = data.position;
-            if (data.experience) document.getElementById('experience').textContent = data.experience;
+            if (data.payment) document.getElementById('payment').textContent = data.payment;
+            if (data.receipt) document.getElementById('receipt').textContent = data.receipt;
 
             // 정보가 없는 항목은 숨기기
             const infoItems = document.querySelectorAll('.info-item');
